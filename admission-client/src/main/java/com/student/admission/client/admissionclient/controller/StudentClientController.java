@@ -1,8 +1,5 @@
 package com.student.admission.client.admissionclient.controller;
 
-import java.util.List;
-
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,18 +16,17 @@ import com.student.admission.client.admissionclient.vo.StudentVO;
 public class StudentClientController {
 
 	@GetMapping(value = "/getDetailsStudent/{sRollNo}")
-	public ResponseEntity<List<StudentVO>> getDetailsByStudentRollNo(@PathVariable("sRollNo") String sRollNo) {
-		/*List<StudentVO> studentDetails = studentService.getStudentDetails(sRollNo);*/
-		
-		
-		String baseUrl = "http://localhost:9090/saveStudentDetails/getByRollNo" + "/" + sRollNo;
-		List<StudentVO> response = null;
+	public ResponseEntity<StudentVO> getDetailsByStudentRollNo(@PathVariable("sRollNo") String sRollNo) {
+		/*
+		 * List<StudentVO> studentDetails = studentService.getStudentDetails(sRollNo);
+		 */
+
+		String baseUrl = "http://localhost:9090/student/getByRollNo" + "/" + sRollNo;
+		StudentVO response = null;
 		RestTemplate restTemplate = new RestTemplate();
-		ResponseEntity<List<StudentVO>> responseEntity = null;
-		responseEntity = restTemplate.exchange(baseUrl, HttpMethod.GET, null,
-				new ParameterizedTypeReference<List<StudentVO>>() {
-				});
+		ResponseEntity<StudentVO> responseEntity = null;
+		responseEntity = restTemplate.exchange(baseUrl, HttpMethod.GET, null, StudentVO.class);
 		response = responseEntity.getBody();
-		return new ResponseEntity<List<StudentVO>>(response, HttpStatus.OK);
+		return new ResponseEntity<StudentVO>(response, HttpStatus.OK);
 	}
 }
