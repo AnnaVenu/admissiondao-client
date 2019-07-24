@@ -20,6 +20,7 @@ public class StudentClientController {
 		/*
 		 * List<StudentVO> studentDetails = studentService.getStudentDetails(sRollNo);
 		 */
+		
 
 		String baseUrl = "http://localhost:9090/student/getByRollNo" + "/" + sRollNo;
 		StudentVO response = null;
